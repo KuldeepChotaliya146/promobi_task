@@ -52,6 +52,6 @@ class Api::V1::CoursesController < Api::V1::BaseController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:name)
+    params.require(:course).permit(:name, tutors_attributes: [:id, :first_name, :last_name])
   end
 end
