@@ -46,7 +46,8 @@ class Api::V1::CoursesController < Api::V1::BaseController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_course
-    @course = Course.find(params[:id])
+    @course = Course.find_by(id: params[:id])
+    render_404('Course not found!') if @course.blank?
   end
 
   # Only allow a list of trusted parameters through.
