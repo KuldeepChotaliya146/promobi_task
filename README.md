@@ -39,7 +39,7 @@ bundle exec rails s
 
 And now you can visit the site with the URL <http://localhost:3000>
 
-##### Postman Documentation link:-
+##### Postman Documentation link for APIs:-
 
 ```bash
  https://documenter.getpostman.com/view/12704122/2s93z6e4aL
