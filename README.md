@@ -1,24 +1,46 @@
-# README
+##### Prerequisites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The setups steps expect following tools installed on the system.
 
-Things you may want to cover:
+- Github
+- Ruby [3.2.0]
+- Rails [7.0.5]
 
-* Ruby version
+##### 1. Check out the repository
 
-* System dependencies
+```bash
+git clone https://github.com/KuldeepChotaliya146/promobi_task.git
+```
 
-* Configuration
+##### 2. Install Gems
 
-* Database creation
+Install Gem dependencies using bundle install
 
-* Database initialization
+```bash
+bundle install
+```
 
-* How to run the test suite
+##### 3. Create and setup the database
 
-* Services (job queues, cache servers, search engines, etc.)
+Run the following commands to create and setup the database.
 
-* Deployment instructions
+```ruby
+bundle exec rake db:create
+bundle exec rake db:setup
+```
 
-* ...
+##### 4. Start the Rails server
+
+You can start the rails server using the command given below.
+
+```ruby
+bundle exec rails s
+```
+
+And now you can visit the site with the URL <http://localhost:3000>
+
+##### Postman Documentation link:-
+
+```bash
+ https://documenter.getpostman.com/view/12704122/2s93z6e4aL
+```
