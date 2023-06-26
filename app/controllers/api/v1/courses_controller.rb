@@ -4,14 +4,12 @@ class Api::V1::CoursesController < Api::V1::BaseController
   # GET /courses
   def index
     courses = Course.all
-    serialized_courses = CourseSerializer.new(courses).serializable_hash
-    render_json('Courses fetched successfully!', serialized_courses[:data])
+    render_courses(courses)
   end
 
   # GET /courses/1
   def show
-    serialized_course = CourseSerializer.new(@course).serializable_hash
-    render_json('Courses fetched successfully!', serialized_course[:data])
+    render_courses(@course)
   end
 
   # POST /courses
@@ -19,8 +17,7 @@ class Api::V1::CoursesController < Api::V1::BaseController
     course = Course.new(course_params)
 
     if course.save
-      serialized_course = CourseSerializer.new(course).serializable_hash
-      render_json('Course Created Successfully!', serialized_course[:data])
+      render_courses('Course saved successfully!', course)
     else
       render_422(course.errors.full_messages)
     end
@@ -29,8 +26,7 @@ class Api::V1::CoursesController < Api::V1::BaseController
   # PATCH/PUT /courses/1
   def update
     if @course.update(course_params)
-      serialized_course = CourseSerializer.new(@course).serializable_hash
-      render_json('Course Updated Successfully!', serialized_course[:data])
+      render_courses('Course updated successfully!', @course)
     else
       render_422(@course.errors.full_messages)
     end
@@ -53,5 +49,10 @@ class Api::V1::CoursesController < Api::V1::BaseController
   # Only allow a list of trusted parameters through.
   def course_params
     params.require(:course).permit(:name, tutors_attributes: [:id, :first_name, :last_name])
+  end
+
+  def render_courses(message='Courses fetched successfully!', courses)
+    serialized_courses = CourseSerializer.new(courses).serializable_hash
+    render_json(message, serialized_courses[:data])
   end
 end

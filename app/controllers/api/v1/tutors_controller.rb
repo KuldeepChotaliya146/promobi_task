@@ -5,14 +5,12 @@ class Api::V1::TutorsController < Api::V1::BaseController
   def index
     tutors = Tutor.all
 
-    serialized_tutors = TutorSerializer.new(tutors).serializable_hash
-    render_json('Tutors fetched successfully!', serialized_tutors[:data])
+    render_tutors(tutors)
   end
 
   # GET /tutors/1
   def show
-    serialized_tutor = TutorSerializer.new(@tutor).serializable_hash
-    render_json('Tutor fetched successfully!', serialized_tutor[:data])
+    render_tutors(@tutor)
   end
 
   # POST /tutors
@@ -20,8 +18,7 @@ class Api::V1::TutorsController < Api::V1::BaseController
     tutor = Tutor.new(tutor_params)
 
     if tutor.save
-      serialized_tutor = TutorSerializer.new(tutor).serializable_hash
-      render_json('Tutor fetched successfully!', serialized_tutor[:data])
+      render_tutors('Tutor saved successfully!', tutor)
     else
       render_422(tutor.errors.full_messages)
     end
@@ -30,8 +27,7 @@ class Api::V1::TutorsController < Api::V1::BaseController
   # PATCH/PUT /tutors/1
   def update
     if @tutor.update(tutor_params)
-      serialized_tutor = TutorSerializer.new(@tutor).serializable_hash
-      render_json('Tutor Updated successfully!', serialized_tutor[:data])
+      render_tutors('Tutor updated successfully!', @tutor)
     else
       render_422(@tutor.errors.full_messages)
     end
@@ -54,5 +50,10 @@ class Api::V1::TutorsController < Api::V1::BaseController
   # Only allow a list of trusted parameters through.
   def tutor_params
     params.require(:tutor).permit(:first_name, :last_name, :course_id)
+  end
+
+  def render_tutors(message= "Tutors fetched successfully!", tutors)
+    serialized_tutors = TutorSerializer.new(tutors).serializable_hash
+    render_json(message, serialized_tutors[:data])
   end
 end
