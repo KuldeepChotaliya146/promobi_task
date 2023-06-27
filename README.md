@@ -43,9 +43,3 @@ And now you can visit the site with the URL <http://localhost:3000>
 ```bash
  https://documenter.getpostman.com/view/12704122/2s93z6e4aL
 ```
-
-#### Postman API collection:-
-
-```bash
-https://api.postman.com/collections/12704122-a1d521b7-22b8-4da1-84eb-3f19ca604eb7?access_key=PMAT-01H3VRQ33G4042Q3K3CMT8HWDP
-```
